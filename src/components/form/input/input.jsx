@@ -1,6 +1,14 @@
+import { useEffect, useState } from "react";
+
 function Input(prop) {
+  const [val, setVal] = useState("");
   let inputCalsses = prop.classes ? ` ${prop.classes}` : "";
   let iconClasses = prop.iconClass ? ` ${prop.iconClass}` : "";
+  useEffect(() => {
+    if (prop.val) {
+      setVal(prop.val);
+    }
+  }, []);
 
   const checkValidation = (e) => {
     let isEmpty = true;
@@ -28,6 +36,8 @@ function Input(prop) {
         type={prop.type}
         className={inputCalsses}
         placeholder={prop.holder}
+        value={val}
+        onChange={(e) => setVal(e.target.value)}
       />
       <span className={`icon ${iconClasses}`}>{prop.icon}</span>
     </div>
